@@ -187,6 +187,11 @@
   transition: background var(--dur-base) var(--ease-out),
               color var(--dur-base) var(--ease-out);
 }
+
+/* Backdrop element (created in JS) — hidden by default on desktop */
+.nav-backdrop {
+  display: none;
+}
 .nav-mobile-toggle svg line {
   transform-origin: center;
   transition: transform var(--dur-base) var(--ease-out),
@@ -211,11 +216,12 @@
   .nav-mobile-toggle {
     display: flex;
     order: -1; /* first in flex = start = right edge in RTL */
-    background: var(--color-ink);
-    color: var(--color-ink-inverse);
+    background: transparent;
+    color: var(--color-ink);
   }
   .nav-mobile-toggle[aria-expanded="true"] {
-    background: var(--color-accent);
+    background: transparent;
+    color: var(--color-accent);
   }
   /* Hamburger morphs into X when expanded */
   .nav-mobile-toggle[aria-expanded="true"] svg line:nth-child(1) {
@@ -232,41 +238,61 @@
     display: none;
   }
 
-  /* Mobile menu = panel that drops down from the nav like a curtain */
+  /* Mobile menu = right-side drawer (slides in from the right in RTL) */
   .nav-menu {
-    /* default: hidden state. Use display flex so transitions work */
     display: flex !important;
     position: fixed;
-    top: 76px; /* below the nav (hamburger 44 + padding 32 = 76) */
+    top: 0;
     right: 0;
     bottom: 0;
-    left: 0;
+    width: 320px;
+    max-width: 85vw;
     background: var(--color-bg);
     flex-direction: column;
     align-items: stretch;
-    padding: var(--sp-4) var(--gutter) var(--sp-7);
+    padding: calc(var(--sp-9) + 8px) var(--gutter) var(--sp-7);
     gap: 0;
-    z-index: calc(var(--z-sticky) - 1);
+    z-index: var(--z-overlay);
     overflow-y: auto;
-    border-top: 1px solid var(--color-border);
-    box-shadow: 0 16px 32px rgba(15, 31, 60, 0.08);
-    /* hidden: pushed fully above its own area, invisible, non-interactive */
-    transform: translateY(-100%);
-    opacity: 0;
+    box-shadow: -16px 0 32px rgba(15, 31, 60, 0.12);
+    /* hidden: slid off-screen to the right */
+    transform: translateX(100%);
     visibility: hidden;
     pointer-events: none;
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-                opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1) 0.1s,
                 visibility 0s linear 0.4s;
   }
   .nav-menu.is-open {
-    transform: translateY(0);
-    opacity: 1;
+    transform: translateX(0);
     visibility: visible;
     pointer-events: auto;
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-                opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1),
                 visibility 0s linear 0s;
+  }
+
+  /* Hamburger sits above the drawer for clickability */
+  .nav-mobile-toggle {
+    position: relative;
+    z-index: calc(var(--z-overlay) + 1);
+  }
+
+  /* Backdrop behind the drawer */
+  .nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 31, 60, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: calc(var(--z-overlay) - 1);
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+  }
+  body.menu-open .nav-backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.3s ease, visibility 0s linear 0s;
   }
 
   .nav-menu a {

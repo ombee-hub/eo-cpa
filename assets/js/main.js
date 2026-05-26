@@ -19,8 +19,14 @@
   const mobileToggle = document.querySelector('.nav-mobile-toggle');
   const navMenu = document.querySelector('.nav-menu');
   if (mobileToggle && navMenu) {
+    // Create backdrop element dynamically (avoids HTML edits across pages)
+    const backdrop = document.createElement('div');
+    backdrop.className = 'nav-backdrop';
+    document.body.appendChild(backdrop);
+
     const setMenu = (open) => {
       navMenu.classList.toggle('is-open', open);
+      document.body.classList.toggle('menu-open', open);
       mobileToggle.setAttribute('aria-expanded', String(open));
       mobileToggle.setAttribute('aria-label', open ? 'סגור תפריט' : 'פתח תפריט');
       document.body.style.overflow = open ? 'hidden' : '';
@@ -30,7 +36,10 @@
       setMenu(!navMenu.classList.contains('is-open'));
     });
 
-    // Close when clicking a link inside the overlay
+    // Click on backdrop closes the menu
+    backdrop.addEventListener('click', () => setMenu(false));
+
+    // Close when clicking a link inside the drawer
     navMenu.addEventListener('click', (e) => {
       if (e.target.closest('a')) setMenu(false);
     });
