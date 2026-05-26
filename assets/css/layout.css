@@ -330,22 +330,22 @@
     color: var(--color-accent);
   }
 
-  /* CTA: floating button at bottom of screen when menu is open
-     — rectangular with rounded corners, above the menu (z:100 > menu's 99) */
+  /* CTA: sits INSIDE the drawer at its bottom — width matches the drawer
+     content area (320px - 2 * gutter) and z-index above the drawer */
   .nav-menu.is-open ~ .nav-cta {
     display: inline-flex;
     position: fixed;
     bottom: var(--sp-5);
-    left: var(--gutter);
     right: var(--gutter);
-    width: auto;
-    z-index: var(--z-sticky);
+    left: auto;
+    width: calc(min(320px, 85vw) - 2 * var(--gutter));
+    z-index: calc(var(--z-overlay) + 1);
     justify-content: center;
     padding: var(--sp-4) var(--sp-5);
     font-size: var(--fs-md);
-    border-radius: var(--radius-lg); /* rectangular with rounded corners (16px) */
+    border-radius: var(--radius-lg);
     animation: ctaSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
-    box-shadow: 0 12px 32px rgba(15, 31, 60, 0.18);
+    box-shadow: 0 8px 20px rgba(15, 31, 60, 0.12);
   }
 
   @keyframes ctaSlideUp {
