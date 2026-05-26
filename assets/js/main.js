@@ -250,9 +250,14 @@
       איפוס כל ההגדרות
     </button>
     <div class="a11y-footer">
-      <a href="accessibility.html">הצהרת נגישות</a>
-      <span aria-hidden="true">·</span>
-      <a href="privacy.html">מדיניות פרטיות</a>
+      <a href="accessibility.html" class="a11y-footer-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        <span>הצהרת נגישות</span>
+      </a>
+      <a href="privacy.html" class="a11y-footer-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span>מדיניות פרטיות</span>
+      </a>
     </div>
   `;
   document.body.appendChild(a11yPanel);
