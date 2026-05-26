@@ -155,19 +155,29 @@
   // ---------- Accessibility widget ----------
   const a11yOptions = [
     {
-      key: 'large-text',
-      label: 'טקסט גדול',
-      icon: '<path d="M4 7h16M9 5v14M15 5v14"/>'
-    },
-    {
-      key: 'high-contrast',
-      label: 'ניגודיות גבוהה',
-      icon: '<circle cx="12" cy="12" r="9"/><path d="M12 3v18" fill="currentColor"/>'
-    },
-    {
       key: 'highlight-links',
       label: 'הדגשת קישורים',
       icon: '<path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/>'
+    },
+    {
+      key: 'high-contrast',
+      label: 'ניגודיות',
+      icon: '<circle cx="12" cy="12" r="9"/><path d="M12 3v18" fill="currentColor"/>'
+    },
+    {
+      key: 'letter-spacing',
+      label: 'ריווח טקסט',
+      icon: '<path d="M5 12h14M5 12l3-3M5 12l3 3M19 12l-3-3M19 12l-3 3"/><path d="M3 6h2M3 18h2M19 6h2M19 18h2"/>'
+    },
+    {
+      key: 'large-text',
+      label: 'טקסט גדול',
+      icon: '<path d="M4 6h16M10 6v14M14 6v14"/>'
+    },
+    {
+      key: 'hide-images',
+      label: 'הסתרת תמונות',
+      icon: '<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="3" x2="21" y2="21"/><path d="M8.5 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>'
     },
     {
       key: 'no-animations',
@@ -175,9 +185,14 @@
       icon: '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>'
     },
     {
+      key: 'big-cursor',
+      label: 'סמן',
+      icon: '<path d="M5 2l14 8-7 2-2 7z"/>'
+    },
+    {
       key: 'dyslexia',
-      label: 'דיסלקציה',
-      icon: '<path d="M4 7V5h10v2"/><path d="M9 5v14"/><path d="M5 19h8"/><path d="M14 14h6m-3-3v6"/>'
+      label: 'תמיכה בדיסלקציה',
+      icon: '<path d="M5 7h14M9 7v10M5 17h8M16 11h4m-2-2v4"/>'
     },
     {
       key: 'line-spacing',
@@ -185,14 +200,19 @@
       icon: '<path d="M3 6h18M3 12h18M3 18h18"/>'
     },
     {
-      key: 'letter-spacing',
-      label: 'ריווח טקסט',
-      icon: '<path d="M5 19l7-14 7 14"/><path d="M8 14h8"/>'
+      key: 'tooltips',
+      label: 'תיאורים',
+      icon: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><circle cx="12" cy="10" r="0.5" fill="currentColor"/><path d="M12 8v1"/>'
     },
     {
-      key: 'big-cursor',
-      label: 'סמן גדול',
-      icon: '<path d="M5 2l14 8-7 2-2 7z"/>'
+      key: 'no-saturation',
+      label: 'רוויה',
+      icon: '<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>'
+    },
+    {
+      key: 'align-text',
+      label: 'יישור טקסט',
+      icon: '<path d="M3 6h18M3 12h12M3 18h18M3 9h18M3 15h12"/>'
     }
   ];
 
