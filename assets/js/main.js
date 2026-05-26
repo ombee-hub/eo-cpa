@@ -201,7 +201,7 @@
   a11yFab.type = 'button';
   a11yFab.className = 'a11y-fab';
   a11yFab.setAttribute('aria-label', 'פתח תפריט נגישות');
-  a11yFab.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="4" r="2"/><path d="M19 8v-1.4l-7 .9-7-.9V8l5.5 1L8 22h2l2-7 2 7h2l-2.5-13z"/></svg>';
+  a11yFab.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="4" r="2.5"/><path d="M21 8c0-.83-.67-1.5-1.5-1.5-1.79 0-3.5.5-7.5.5s-5.71-.5-7.5-.5C3.67 6.5 3 7.17 3 8s.67 1.5 1.5 1.5h.5l3 1.5v2.5l-2 8c-.14.55.2 1.1.74 1.24.55.14 1.1-.2 1.24-.74L9.5 15h1L12 21l1.5-5h1l1.52 6c.14.54.69.88 1.24.74.54-.14.88-.69.74-1.24l-2-8V11l3-1.5h.5c.83 0 1.5-.67 1.5-1.5z"/></svg>';
   document.body.appendChild(a11yFab);
 
   // Build the panel
