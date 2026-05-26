@@ -1508,6 +1508,7 @@
   display: flex;
   gap: var(--sp-2);
   align-items: center;
+  margin-inline-start: var(--sp-4); /* breathing room from the יצירת קשר button */
 }
 /* Push the CTA (and social + hamburger after it) to the left, keeping logo + menu on the right */
 .nav-cta {
