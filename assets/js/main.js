@@ -24,13 +24,25 @@
     backdrop.className = 'nav-backdrop';
     document.body.appendChild(backdrop);
 
-    // Inject a dedicated close button inside the drawer (top-left in RTL)
+    // Inject a header inside the drawer with logo (right) + close button (left)
+    const drawerHeader = document.createElement('div');
+    drawerHeader.className = 'nav-drawer-header';
+
+    const drawerLogo = document.createElement('a');
+    drawerLogo.href = 'index.html';
+    drawerLogo.className = 'nav-drawer-logo';
+    drawerLogo.setAttribute('aria-label', 'ארז עובד רואי חשבון');
+    drawerLogo.innerHTML = '<img src="images/logo-ink.png" alt="Erez Oved & Co">';
+
     const closeBtn = document.createElement('button');
     closeBtn.type = 'button';
     closeBtn.className = 'nav-close';
     closeBtn.setAttribute('aria-label', 'סגור תפריט');
     closeBtn.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>';
-    navMenu.prepend(closeBtn);
+
+    drawerHeader.appendChild(drawerLogo);  // first in RTL flex = right side
+    drawerHeader.appendChild(closeBtn);    // last in RTL flex = left side
+    navMenu.prepend(drawerHeader);
 
     const setMenu = (open) => {
       navMenu.classList.toggle('is-open', open);
