@@ -234,11 +234,15 @@
 
 @media (max-width: 900px) {
   /* On mobile, remove backdrop-filter from .nav so position:fixed children
-     anchor to viewport (backdrop-filter creates a containing block). */
+     anchor to viewport (backdrop-filter creates a containing block).
+     Raise the nav's z-index so its descendants (the drawer) sit above
+     the backdrop. The nav creates its own stacking context, which caps
+     descendant z-index to the nav's global level. */
   .nav {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     background: var(--color-bg);
+    z-index: calc(var(--z-overlay) + 10);
   }
 
   /* Layout: hamburger on right edge (start in RTL), logo to its left */
