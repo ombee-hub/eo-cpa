@@ -135,7 +135,7 @@
   color: var(--color-accent);
 }
 
-/* Mobile: flatten dropdown into the overlay menu */
+/* Mobile: dropdown collapses with chevron toggle */
 @media (max-width: 900px) {
   .nav-dropdown {
     width: 100%;
@@ -145,8 +145,12 @@
     justify-content: space-between;
   }
   .nav-dropdown-arrow {
-    display: none;
+    display: block;
+    width: 14px;
+    height: 14px;
+    color: var(--color-ink-mute);
   }
+  /* Collapsed state on mobile */
   .nav-dropdown-menu {
     position: static;
     opacity: 1;
@@ -155,18 +159,32 @@
     background: transparent;
     border: none;
     box-shadow: none;
-    padding: 0;
     min-width: 0;
-    margin-top: var(--sp-2);
-    margin-bottom: var(--sp-3);
+    /* collapsed */
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+  /* Override desktop hover behavior on mobile (touch can't hover reliably) */
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu {
+    max-height: 0;
+    padding: 0;
+  }
+  .nav-dropdown.is-open .nav-dropdown-menu {
+    max-height: 500px;
+    padding-block: var(--sp-2);
+    margin-bottom: var(--sp-2);
   }
   .nav-dropdown-menu a {
     font-family: var(--font-display);
-    font-size: var(--fs-md);
-    font-weight: 600;
-    padding: var(--sp-3) var(--sp-5);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    padding: var(--sp-2) var(--sp-5);
     color: var(--color-ink-soft);
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: none;
     border-radius: 0;
     text-align: right;
   }
@@ -223,15 +241,12 @@
     background: transparent;
     color: var(--color-accent);
   }
-  /* Hamburger morphs into X when expanded */
-  .nav-mobile-toggle[aria-expanded="true"] svg line:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
+  /* Clean icon swap (handled in JS) — gentle rotation hint */
+  .nav-mobile-toggle svg {
+    transition: transform var(--dur-base) var(--ease-out);
   }
-  .nav-mobile-toggle[aria-expanded="true"] svg line:nth-child(2) {
-    opacity: 0;
-  }
-  .nav-mobile-toggle[aria-expanded="true"] svg line:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
+  .nav-mobile-toggle[aria-expanded="true"] svg {
+    transform: rotate(90deg);
   }
 
   .nav-cta {
@@ -297,10 +312,10 @@
 
   .nav-menu a {
     font-family: var(--font-display);
-    font-size: var(--fs-xl);
-    font-weight: 700;
+    font-size: var(--fs-md);
+    font-weight: 600;
     color: var(--color-ink);
-    padding-block: var(--sp-4);
+    padding-block: var(--sp-3);
     border-bottom: 1px solid var(--color-border);
     line-height: 1.2;
     text-align: right;

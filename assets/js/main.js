@@ -24,12 +24,18 @@
     backdrop.className = 'nav-backdrop';
     document.body.appendChild(backdrop);
 
+    // Clean SVG icons (swapped via JS)
+    const hamburgerSvg = '<line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/>';
+    const closeSvg = '<line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/>';
+    const toggleSvg = mobileToggle.querySelector('svg');
+
     const setMenu = (open) => {
       navMenu.classList.toggle('is-open', open);
       document.body.classList.toggle('menu-open', open);
       mobileToggle.setAttribute('aria-expanded', String(open));
       mobileToggle.setAttribute('aria-label', open ? 'סגור תפריט' : 'פתח תפריט');
       document.body.style.overflow = open ? 'hidden' : '';
+      if (toggleSvg) toggleSvg.innerHTML = open ? closeSvg : hamburgerSvg;
     };
 
     mobileToggle.addEventListener('click', () => {
@@ -39,8 +45,15 @@
     // Click on backdrop closes the menu
     backdrop.addEventListener('click', () => setMenu(false));
 
-    // Close when clicking a link inside the drawer
+    // Close when clicking a link inside the drawer (but NOT the dropdown trigger on mobile)
     navMenu.addEventListener('click', (e) => {
+      const dropdownTrigger = e.target.closest('.nav-dropdown-trigger');
+      if (dropdownTrigger && window.innerWidth <= 900) {
+        // On mobile, the trigger toggles the dropdown instead of navigating
+        e.preventDefault();
+        dropdownTrigger.closest('.nav-dropdown').classList.toggle('is-open');
+        return;
+      }
       if (e.target.closest('a')) setMenu(false);
     });
 
