@@ -24,10 +24,13 @@
     backdrop.className = 'nav-backdrop';
     document.body.appendChild(backdrop);
 
-    // Clean SVG icons (swapped via JS)
-    const hamburgerSvg = '<line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/>';
-    const closeSvg = '<line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/>';
-    const toggleSvg = mobileToggle.querySelector('svg');
+    // Inject a dedicated close button inside the drawer (top-left in RTL)
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'nav-close';
+    closeBtn.setAttribute('aria-label', 'סגור תפריט');
+    closeBtn.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>';
+    navMenu.prepend(closeBtn);
 
     const setMenu = (open) => {
       navMenu.classList.toggle('is-open', open);
@@ -35,8 +38,9 @@
       mobileToggle.setAttribute('aria-expanded', String(open));
       mobileToggle.setAttribute('aria-label', open ? 'סגור תפריט' : 'פתח תפריט');
       document.body.style.overflow = open ? 'hidden' : '';
-      if (toggleSvg) toggleSvg.innerHTML = open ? closeSvg : hamburgerSvg;
     };
+
+    closeBtn.addEventListener('click', () => setMenu(false));
 
     mobileToggle.addEventListener('click', () => {
       setMenu(!navMenu.classList.contains('is-open'));

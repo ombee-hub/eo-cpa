@@ -206,6 +206,22 @@
               color var(--dur-base) var(--ease-out);
 }
 
+/* Dedicated close button inside the drawer (created in JS) */
+.nav-close {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--color-ink);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+
 /* Backdrop element (created in JS) — hidden by default on desktop */
 .nav-backdrop {
   display: none;
@@ -241,12 +257,25 @@
     background: transparent;
     color: var(--color-accent);
   }
-  /* Clean icon swap (handled in JS) — gentle rotation hint */
-  .nav-mobile-toggle svg {
-    transition: transform var(--dur-base) var(--ease-out);
+  /* Hide the hamburger button while the drawer is open
+     (the dedicated close button inside the drawer handles closing) */
+  body.menu-open .nav-mobile-toggle {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-fast) var(--ease-out);
   }
-  .nav-mobile-toggle[aria-expanded="true"] svg {
-    transform: rotate(90deg);
+
+  /* Close button inside the drawer (top-left of the panel in RTL) */
+  .nav-close {
+    display: flex;
+    position: absolute;
+    top: var(--sp-4);
+    left: var(--sp-4);
+    z-index: 1;
+  }
+  .nav-close:hover {
+    background: var(--color-bg-muted);
+    color: var(--color-accent);
   }
 
   .nav-cta {
