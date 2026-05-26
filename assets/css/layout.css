@@ -320,14 +320,12 @@
     z-index: calc(var(--z-overlay) + 1);
   }
 
-  /* Backdrop behind the drawer — subtle dim + slight blur so page stays visible */
+  /* Backdrop behind the drawer — clean dim, no filter */
   .nav-backdrop {
     display: block;
     position: fixed;
     inset: 0;
-    background: rgba(15, 31, 60, 0.18);
-    backdrop-filter: blur(2px) saturate(85%);
-    -webkit-backdrop-filter: blur(2px) saturate(85%);
+    background: rgba(15, 31, 60, 0.35);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
